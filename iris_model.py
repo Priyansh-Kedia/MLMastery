@@ -39,3 +39,9 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 
+# load the dataset
+url = "iris.csv"
+col_names = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm','Species']
+dataset = read_csv(url, usecols = col_names)
+print(dataset)
+
