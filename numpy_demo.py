@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
 
 mylist = [1,2,3]
 myarray = np.array(mylist)
@@ -40,3 +40,14 @@ plt.scatter(x,y)
 plt.xlabel('X Axis Label')
 plt.ylabel('Y Axis Label')
 plt.show()
+
+
+# Pandas demo
+myarray = np.array([1,2,3])
+rownames = ['a','b','c']
+myseries = pd.Series(myarray, index = rownames)
+print(myseries)
+print(myseries[0])
+print(myseries['a'])
+# A series is a one-dimensional array where the rows and columns can be labeled.
+
