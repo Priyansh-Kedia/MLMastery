@@ -56,3 +56,7 @@ rownames = ['a', 'b']
 colnames = ['one', 'two', 'three']
 mydataframe = pd.DataFrame(myarray, index=rownames, columns=colnames)
 print(mydataframe)
+print("one column: %s" % mydataframe['one'])
+print("one column: %s" % mydataframe.one)
+# A data frame is a multi-dimensional array where the rows and the columns can be labeled.
+
