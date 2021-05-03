@@ -34,3 +34,9 @@ plt.show()
 # for you. Since python ranges start with 0, the default x vector has the 
 # same length as y but starts with 0. Hence the x data are [0, 1, 2, 3]
 
+x = np.array([1, 2, 3])
+y = np.array([2, 4, 6])
+plt.scatter(x,y)
+plt.xlabel('X Axis Label')
+plt.ylabel('Y Axis Label')
+plt.show()
