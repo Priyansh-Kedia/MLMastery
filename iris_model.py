@@ -43,5 +43,13 @@ from sklearn.svm import SVC
 url = "iris.csv"
 col_names = ['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm','Species']
 dataset = read_csv(url, usecols = col_names)
-print(dataset)
+# print(dataset)
 
+# printing first 20 data points
+print(dataset.head(20))
+
+# describe the dataset
+print(dataset.describe())
+
+# class distribution
+print(dataset.groupby('Species').size())
