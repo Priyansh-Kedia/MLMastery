@@ -53,3 +53,14 @@ print(dataset.describe())
 
 # class distribution
 print(dataset.groupby('Species').size())
+
+
+# data visualisation
+dataset.plot(kind = 'box', subplots = True, layout = (2,2), sharex = False, sharey = False)
+plt.show()
+
+dataset.hist()
+plt.show()
+
+scatter_matrix(dataset)
+plt.show()
