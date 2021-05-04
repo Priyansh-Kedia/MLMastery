@@ -15,7 +15,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=test_size, r
 model = LogisticRegression(solver='liblinear')
 model.fit(X_train, Y_train)
 # save the model to disk
-filename = 'finalized_model.sav'
+filename = 'finalized_model.pickle'
 pickle.dump(model, open(filename, 'wb'))
  
 # some time later...
