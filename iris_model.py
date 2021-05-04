@@ -69,19 +69,49 @@ array = dataset.values
 X = array[:,0:4]
 y = array[:,4]
 X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size = 0.2, random_state = 1)
+# In this case, random state basically specifies that your data will be split in a specific order always
+# For example, the order you will get in random_state=0 remain same. After that if you execute
+# random_state=5 and again come back to random_state=0 you'll get the same order.
 
 models = []
 models.append(('LR', LogisticRegression(solver='liblinear',multi_class='ovr')))
+# solver can take {‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’}, 
+# and default=’lbfgs’. This specifies the algorithm to use for optimisation.
+# For small datasets, ‘liblinear’ is a good choice, whereas ‘sag’ and ‘saga’ are 
+# faster for large ones. For multiclass problems, only ‘newton-cg’, ‘sag’, ‘saga’
+#  and ‘lbfgs’ handle multinomial loss; ‘liblinear’ is limited to one-versus-rest schemes.
+
+# multi_class is {‘auto’, ‘ovr’, ‘multinomial’}, default=’auto’
+# If the option chosen is ‘ovr’, then a binary problem is fit for 
+# each label. For ‘multinomial’ the loss minimised is the multinomial 
+# loss fit across the entire probability distribution, even when the 
+# data is binary. ‘multinomial’ is unavailable when solver=’liblinear’.
+# ‘auto’ selects ‘ovr’ if the data is binary, or if solver=’liblinear’, 
+# and otherwise selects ‘multinomial’.
+
 models.append(('LDA', LinearDiscriminantAnalysis()))
 models.append(('KNN', KNeighborsClassifier()))
 models.append(('CART', DecisionTreeClassifier()))
 models.append(('NB', GaussianNB()))
+
 models.append(('SVM', SVC(gamma='auto')))
+# {‘scale’, ‘auto’} or float, default=’scale’
+# gamma is a parameter for non linear hyperplanes. 
+# The higher the gamma value it tries to exactly fit the training data set.
+# One more parameter that can be passed is, kernels = [‘linear’, ‘rbf’, ‘poly’]
+# Using ‘linear’ will use a linear hyperplane (a line in the case of 2D data). 
+# ‘rbf’ and ‘poly’ uses a non linear hyper-plane.
+
+
 results = []
 names = []
 for name, model in models:
     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
+    # Provides train/test indices to split data in train/test sets.
+
     cv_results = cross_val_score(model, X_train, Y_train, cv=kfold, scoring='accuracy')
+    # Evaluate a score by cross-validation
+
     results.append(cv_results)
     names.append(name)
     print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
