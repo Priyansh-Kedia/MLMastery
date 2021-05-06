@@ -34,3 +34,10 @@ model = LogisticRegression()
 results = model_selection.cross_val_score(model, X, Y, cv=loocv)
 print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))
 
+# Repeated Random Test-Train Splits
+test_size = 0.33
+seed = 7
+kfold = model_selection.ShuffleSplit(n_splits=10, test_size=test_size, random_state=seed)
+model = LogisticRegression()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))
