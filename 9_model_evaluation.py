@@ -41,3 +41,11 @@ kfold = model_selection.ShuffleSplit(n_splits=10, test_size=test_size, random_st
 model = LogisticRegression()
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))
+
+# Generally k-fold cross validation is the gold-standard for evaluating 
+# the performance of a machine learning algorithm on unseen data with k 
+# set to 3, 5, or 10. Using a train/test split is good for speed when using
+# a slow algorithm and produces performance estimates with lower bias when 
+# using large datasets. Techniques like leave-one-out cross validation 
+# and repeated random splits can be useful intermediates when trying to balance 
+# variance in the estimated performance, model training speed and dataset size.
