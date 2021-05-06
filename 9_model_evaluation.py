@@ -27,3 +27,10 @@ model = LogisticRegression()
 results = model_selection.cross_val_score(model, X, Y, cv = kfold)
 print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))
 
+# Leave one out cross validation
+num_folds = 10
+loocv = model_selection.LeaveOneOut()
+model = LogisticRegression()
+results = model_selection.cross_val_score(model, X, Y, cv=loocv)
+print("Accuracy: %.3f%% (%.3f%%)" % (results.mean()*100.0, results.std()*100.0))
+
