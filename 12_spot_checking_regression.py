@@ -6,6 +6,7 @@ from sklearn import model_selection
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.svm import SVR
 
 # ----------------------- Linear Algorithms -------------------------
 
@@ -79,6 +80,15 @@ print(results.mean())
 # a cost metric. The default cost metric for regression decision trees is the mean squared 
 # error, specified in the criterion parameter.
 model = DecisionTreeRegressor()
+scoring = 'neg_mean_squared_error'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print(results.mean())
+
+
+# Support Vector Machines (SVM) were developed for binary classification. The technique 
+# has been extended for the prediction real-valued problems called Support Vector 
+# Regression (SVR). Like the classification example, SVR is built upon the LIBSVM library.
+model = SVR()
 scoring = 'neg_mean_squared_error'
 results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
 print(results.mean())
