@@ -71,7 +71,6 @@ print(report)
 
 # Mean absolute error is the average of the absolute differences between predictions 
 # and actual values. It gives an idea of how wrong the predictions were.
-
 url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/housing.data"
 names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
 dataframe = pd.read_csv(url, delim_whitespace=True, names=names)
@@ -83,3 +82,17 @@ model = LinearRegression()
 scoring = 'neg_mean_absolute_error'
 results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
 print("MAE: %.3f (%.3f)" % (results.mean(), results.std()))
+
+
+# Mean Squared Error is much like the mean absolute error in that it provides 
+# a gross idea of the magnitude of error. Taking the square root of the mean 
+# squared error converts the units back to the original units of the output 
+# variable and can be meaningful for description and presentation. This is 
+# called the Root Mean Squared Error (or RMSE).
+kfold = model_selection.KFold(n_splits=10, random_state=7, shuffle=True)
+model = LinearRegression()
+scoring = 'neg_mean_squared_error'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print("MSE: %.3f (%.3f)" % (results.mean(), results.std()))
+
+
