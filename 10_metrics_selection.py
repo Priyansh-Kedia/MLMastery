@@ -1,7 +1,11 @@
 import pandas as pd
 from sklearn import model_selection
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.metrics import confusion_matrix, classification_report
+
+
+
+# ----------------------------------- Classification Metrics ------------------------------------------------------
 
 # Classification accuracy is the number of correct predictions made as a ratio of all predictions made.
 # It is really only suitable when there are an equal number of observations in each class 
@@ -51,3 +55,31 @@ model.fit(X_train, Y_train)
 predicted = model.predict(X_test)
 matrix = confusion_matrix(Y_test, predicted)
 print(matrix)
+
+
+# Classification Report 
+test_size = 0.33
+X_train, X_test, Y_train, Y_test = model_selection.train_test_split(X, Y, test_size=test_size, random_state=7)
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train, Y_train)
+predicted = model.predict(X_test)
+report = classification_report(Y_test, predicted)
+print(report)
+
+
+# ----------------------------------- Regression Metrics ------------------------------------------------------
+
+# Mean absolute error is the average of the absolute differences between predictions 
+# and actual values. It gives an idea of how wrong the predictions were.
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/housing.data"
+names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
+dataframe = pd.read_csv(url, delim_whitespace=True, names=names)
+array = dataframe.values
+X = array[:,0:13]
+Y = array[:,13]
+kfold = model_selection.KFold(n_splits=10, random_state=7, shuffle=True)
+model = LinearRegression()
+scoring = 'neg_mean_absolute_error'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print("MAE: %.3f (%.3f)" % (results.mean(), results.std()))
