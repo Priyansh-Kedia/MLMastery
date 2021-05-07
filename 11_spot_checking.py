@@ -4,6 +4,7 @@
 import pandas as pd
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 # ----------------------- Linear Algorithms -------------------------
 
@@ -22,4 +23,9 @@ results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
 
 
-
+# Linear Discriminant Analysis or LDA is a statistical technique for binary and 
+# multi-class classification. It too assumes a Gaussian distribution for the 
+# numerical input variables.
+model = LinearDiscriminantAnalysis()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print(results.mean())
