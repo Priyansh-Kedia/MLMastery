@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 
 # ----------------------- Linear Algorithms -------------------------
 
@@ -50,6 +51,15 @@ print(results.mean())
 # estimated for new data and multiplied together, assuming that they are 
 # all independent (a simple or naive assumption).
 model = GaussianNB()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print(results.mean())
+
+
+# Classification and Regression Trees (CART or just decision trees) construct 
+# a binary tree from the training data. Split points are chosen greedily by 
+# evaluating each attribute and each value of each attribute in the training 
+# data in order to minimize a cost function (like Gini).
+model = DecisionTreeClassifier()
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
 
