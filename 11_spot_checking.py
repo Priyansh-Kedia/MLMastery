@@ -5,6 +5,8 @@ import pandas as pd
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 
 # ----------------------- Linear Algorithms -------------------------
 
@@ -29,3 +31,18 @@ print(results.mean())
 model = LinearDiscriminantAnalysis()
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
+
+
+
+# ----------------------- Non Linear Algorithms -------------------------
+
+
+# K-Nearest Neighbors (or KNN) uses a distance metric to find the K most 
+# similar instances in the training data for a new instance and takes the 
+# mean outcome of the neighbors as the prediction.
+model = KNeighborsClassifier()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print(results.mean())
+
+
+
