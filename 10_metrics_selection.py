@@ -19,4 +19,12 @@ results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring
 print("Accuracy: %.3f (%.3f)" % (results.mean(), results.std()))
 
 
+# Log loss (Logistic Loss) is a performance metric for evaluating the predictions 
+# of probabilities of membership to a given class. The scalar probability between 
+# 0 and 1 can be seen as a measure of confidence for a prediction by an algorithm. 
+# Predictions that are correct or incorrect are rewarded or punished proportionally 
+# to the confidence of the prediction.
 
+scoring = 'neg_log_loss'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print("Accuracy: %.3f (%.3f)" % (results.mean(), results.std()))
