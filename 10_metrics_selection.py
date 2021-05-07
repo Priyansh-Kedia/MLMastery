@@ -96,3 +96,13 @@ results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring
 print("MSE: %.3f (%.3f)" % (results.mean(), results.std()))
 
 
+# R^2 Metric provides an indication of the goodness of fit of a set of 
+# predictions to the actual values. In statistical literature, this 
+# measure is called the coefficient of determination. This is a value 
+# between 0 and 1 for no-fit and perfect fit respectively.
+kfold = model_selection.KFold(n_splits=10, random_state=7, shuffle=True)
+model = LinearRegression()
+scoring = 'r2'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print("R^2: %.3f (%.3f)" % (results.mean(), results.std()))
+
