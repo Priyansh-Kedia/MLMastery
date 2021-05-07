@@ -28,3 +28,13 @@ print("Accuracy: %.3f (%.3f)" % (results.mean(), results.std()))
 scoring = 'neg_log_loss'
 results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
 print("Accuracy: %.3f (%.3f)" % (results.mean(), results.std()))
+
+
+# Area under ROC curve(or ROC AUC for short) is a performance metric for binary 
+# classification problems. The AUC represents a model’s ability to discriminate 
+# between positive and negative classes. An area of 1.0 represents a model that 
+# made all predictions perfectly. An area of 0.5 represents a model as good as random.
+scoring = 'roc_auc'
+results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
+print("AUC: %.3f (%.3f)" % (results.mean(), results.std()))
+
