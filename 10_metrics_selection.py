@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix
 
 # Classification accuracy is the number of correct predictions made as a ratio of all predictions made.
 # It is really only suitable when there are an equal number of observations in each class 
@@ -38,3 +39,15 @@ scoring = 'roc_auc'
 results = model_selection.cross_val_score(model, X, Y, cv=kfold, scoring=scoring)
 print("AUC: %.3f (%.3f)" % (results.mean(), results.std()))
 
+
+# Confusion Matrix is a handy presentation of the accuracy of a model with two or 
+# more classes. The table presents predictions on the x-axis and accuracy outcomes 
+# on the y-axis. The cells of the table are the number of predictions made by a 
+# machine learning algorithm.
+test_size = 0.33
+X_train, X_test, Y_train, Y_test = model_selection.train_test_split(X, Y, test_size=test_size, random_state=7)
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train, Y_train)
+predicted = model.predict(X_test)
+matrix = confusion_matrix(Y_test, predicted)
+print(matrix)
