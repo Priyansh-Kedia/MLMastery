@@ -45,4 +45,11 @@ results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
 
 
+# Naive Bayes calculates the probability of each class and the conditional 
+# probability of each class given each input value. These probabilities are 
+# estimated for new data and multiplied together, assuming that they are 
+# all independent (a simple or naive assumption).
+model = GaussianNB()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print(results.mean())
 
