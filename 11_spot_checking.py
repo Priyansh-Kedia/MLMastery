@@ -8,6 +8,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 
 # ----------------------- Linear Algorithms -------------------------
 
@@ -62,4 +63,14 @@ print(results.mean())
 model = DecisionTreeClassifier()
 results = model_selection.cross_val_score(model, X, Y, cv=kfold)
 print(results.mean())
+
+
+# Support Vector Machines (or SVM) seek a line that best separates two classes. 
+# Those data instances that are closest to the line that best separates the 
+# classes are called support vectors and influence where the line is placed. 
+# SVM has been extended to support multiple classes.
+model = SVC()
+results = model_selection.cross_val_score(model, X, Y, cv=kfold)
+print(results.mean())
+
 
