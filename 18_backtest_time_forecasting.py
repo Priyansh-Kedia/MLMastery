@@ -27,3 +27,6 @@ train, test = X[0:train_size], X[train_size:len(X)]
 print('Observations: %d' % (len(X)))
 print('Training Observations: %d' % (len(train)))
 print('Testing Observations: %d' % (len(test)))
+plt.plot(train)
+plt.plot([None for i in train] + [x for x in test])
+plt.show()
