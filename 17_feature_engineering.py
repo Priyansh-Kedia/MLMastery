@@ -62,7 +62,11 @@ dataframe = concat([means, temps], axis=1)
 dataframe.columns = ['mean(t-2,t-1)', 't+1']
 print(dataframe.head(5))
 
-
-
-
-
+# Window with width 3
+temps = DataFrame(series.values)
+width = 3
+shifted = temps.shift(width - 1)
+window = shifted.rolling(window=width)
+dataframe = concat([window.min(), window.mean(), window.max(), temps], axis=1)
+dataframe.columns = ['min', 'mean', 'max', 't+1']
+print(dataframe.head(5))
