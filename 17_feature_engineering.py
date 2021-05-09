@@ -51,6 +51,16 @@ print(dataframe.head(5))
 
 
 
+# Rolling window statistics
+temps = DataFrame(series.values)
+shifted = temps.shift(1)
+window = shifted.rolling(window=2)
+# rolling window specifies the window to be taken when using rolling window.
+# So for t = 2, values will be taken for t = 1, and t = 0.
+means = window.mean()
+dataframe = concat([means, temps], axis=1)
+dataframe.columns = ['mean(t-2,t-1)', 't+1']
+print(dataframe.head(5))
 
 
 
