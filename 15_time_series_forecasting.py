@@ -17,4 +17,6 @@ series = read_csv("daily-births.csv",header=0, parse_dates=[0], index_col=0, squ
 print(type(series))
 print(series.head())
 
-
+print(series.size)
+print(series.describe())
+print(series['1959-01'])
