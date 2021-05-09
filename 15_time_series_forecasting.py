@@ -20,3 +20,6 @@ print(series.head())
 print(series.size)
 print(series.describe())
 print(series['1959-01'])
+
+series.plot()
+plt.show()
