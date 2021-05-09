@@ -56,3 +56,15 @@ for train_index, test_index in splits.split(X):
 
 plt.show()
 
+
+
+# Walk forward validation
+# In practice, we very likely will retrain our model as new data becomes available.
+
+n_train = 500
+n_records = len(X)
+for i in range(n_train, n_records):
+	train, test = X[0:i], X[i:i+1]
+	print('train=%d, test=%d' % (len(train), len(test)))
+# This is not expensive if the modeling method is simple or dataset is small (as in 
+# this example), but could be an issue at scale.
