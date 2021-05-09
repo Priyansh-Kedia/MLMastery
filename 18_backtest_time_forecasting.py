@@ -30,3 +30,29 @@ print('Testing Observations: %d' % (len(test)))
 plt.plot(train)
 plt.plot([None for i in train] + [x for x in test])
 plt.show()
+
+
+# Multiple test train splits
+
+# training_size = i * n_samples / (n_splits + 1) + n_samples % (n_splits + 1)
+# test_size = n_samples / (n_splits + 1)
+# Where n_samples is the total number of observations, n_splits is the total 
+# number of splits and i is the iterator value
+from sklearn.model_selection import TimeSeriesSplit
+
+splits = TimeSeriesSplit(n_splits=3)
+plt.figure(1)
+index = 1
+for train_index, test_index in splits.split(X):
+	train = X[train_index]
+	test = X[test_index]
+	print('Observations: %d' % (len(train) + len(test)))
+	print('Training Observations: %d' % (len(train)))
+	print('Testing Observations: %d' % (len(test)))
+	plt.subplot(310 + index) # Read about what this does
+	plt.plot(train)
+	plt.plot([None for i in train] + [x for x in test])
+	index += 1
+
+plt.show()
+
