@@ -22,3 +22,37 @@ print(series.index[0]) # This will print the entire data at first position inclu
 series.plot()
 plt.show()
 
+
+# Lag features are the classical way that time series forecasting problems 
+# are transformed into supervised learning problems.
+# The simplest approach is to predict the value at the next time (t+1) 
+# given the value at the previous time (t-1).
+
+# The Pandas library provides the shift() function to help create these 
+# shifted or lag features from a time series dataset. Shifting the dataset 
+# by 1 creates the t-1 column, adding a NaN (unknown) value for the first 
+# row. The time series dataset without a shift represents the t+1.
+
+from pandas import concat
+
+series = read_csv('daily-min-temperatures.csv', header=0, index_col=0)
+temps = DataFrame(series.values)
+dataframe = concat([temps.shift(1), temps], axis=1)
+# shift(1) tells to shift by 1, axis defines the axis to be shifted
+dataframe.columns = ['t-1','t+1']
+print(dataframe.head(5))
+# This is also known as sliding window method, where the width of the 
+# window is 1
+
+# If last 3 values need to be included, then something like this would be done
+dataframe = concat([temps.shift(3), temps.shift(2), temps.shift(1), temps], axis=1)
+dataframe.columns = ['t-3', 't-2', 't-1', 't+1']
+print(dataframe.head(5))
+
+
+
+
+
+
+
+
