@@ -1,6 +1,7 @@
 # A value is normalise as follows
 # y = (x - min) / (max - min)
 
+# ----------------------------------------- Normalisation ---------------------------------------
 
 from pandas import read_csv
 from sklearn.preprocessing import MinMaxScaler
@@ -26,3 +27,16 @@ print(normalised)
 
 inversed = scaler.inverse_transform(normalised)
 print(inversed)
+
+
+# ------------------------------------------ Standardisation ------------------------------------------------------
+
+# Standardizing a dataset involves rescaling the distribution of values 
+# so that the mean of observed values is 0 and the standard deviation is 1.
+# Standardization assumes that your observations fit a Gaussian distribution 
+# (bell curve) with a well behaved mean and standard deviation.
+
+# y = (x - mean) / standard_deviation
+# mean = sum(x) / count(x)
+# standard_deviation = sqrt( sum( (x - mean)^2 ) / count(x))
+
