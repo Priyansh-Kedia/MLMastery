@@ -40,3 +40,24 @@ print(inversed)
 # mean = sum(x) / count(x)
 # standard_deviation = sqrt( sum( (x - mean)^2 ) / count(x))
 
+from matplotlib import pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from math import sqrt
+
+series.hist()
+plt.show()
+
+values = series.values
+values = values.reshape((len(values), 1))
+# train the standardization
+scaler = StandardScaler()
+scaler = scaler.fit(values)
+print('Mean: %f, StandardDeviation: %f' % (scaler.mean_, sqrt(scaler.var_)))
+
+standardised = scaler.transform(values)
+for i in range(5):
+	print(standardised[i])
+# inverse transform and print the first 5 rows
+inversed = scaler.inverse_transform(standardised)
+for i in range(5):
+	print(inversed[i])
