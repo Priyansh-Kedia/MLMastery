@@ -16,3 +16,13 @@ values = values.reshape((len(values), 1))
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0,1))
 scaler = scaler.fit(values)
+# fit computes the minimum and maximum to be used for later scaling.
+
+print('Min: %f, Max: %f' % (scaler.data_min_, scaler.data_max_))
+
+# normalise dataset
+normalised = scaler.transform(values)
+print(normalised)
+
+inversed = scaler.inverse_transform(normalised)
+print(inversed)
