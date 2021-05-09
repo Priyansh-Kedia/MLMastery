@@ -38,6 +38,7 @@ from pandas import concat
 series = read_csv('daily-min-temperatures.csv', header=0, index_col=0)
 temps = DataFrame(series.values)
 dataframe = concat([temps.shift(1), temps], axis=1)
+print(dataframe.head())
 # shift(1) tells to shift by 1, axis defines the axis to be shifted
 dataframe.columns = ['t-1','t+1']
 print(dataframe.head(5))
@@ -68,5 +69,15 @@ width = 3
 shifted = temps.shift(width - 1)
 window = shifted.rolling(window=width)
 dataframe = concat([window.min(), window.mean(), window.max(), temps], axis=1)
+dataframe.columns = ['min', 'mean', 'max', 't+1']
+print(dataframe.head(5))
+
+
+
+# Expanding window statistics
+# This method includes all values before a specific value
+temps = DataFrame(series.values)
+window = temps.expanding()
+dataframe = concat([window.min(), window.mean(), window.max(), temps.shift(-1)], axis=1)
 dataframe.columns = ['min', 'mean', 'max', 't+1']
 print(dataframe.head(5))
