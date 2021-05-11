@@ -86,3 +86,43 @@ X_norm = scaler.fit_transform(X)
 
 # summarize data after the transform
 print(X_norm[:3, :])
+
+
+
+# One-Hot Encoding, transformation of categorical data into numeric
+# data, as the machine learning algorithms require numerical input.
+
+# Each label for a categorical variable can be mapped to a unique 
+# integer, called an ordinal encoding. Then, a one-hot encoding can 
+# be applied to the ordinal representation. This is where one new 
+# binary variable is added to the dataset for each unique integer 
+# value in the variable, and the original categorical variable is 
+# removed from the dataset.
+
+# For example, imagine we have a “color” variable with three categories 
+# (‘red‘, ‘green‘, and ‘blue‘). In this case, three binary variables are 
+# needed. A “1” value is placed in the binary variable for the color and 
+# “0” values for the other colors.
+
+from pandas import read_csv
+from sklearn.preprocessing import OneHotEncoder
+
+dataset = read_csv('breast-cancer.csv', header=None)
+
+data = dataset.values
+
+# separate into input and output columns
+X = data[:, :-1].astype(str)
+Y = data[:, -1].astype(str)
+
+print(X[:3, :])
+
+# Defining the encoder 
+encoder = OneHotEncoder(sparse=False)
+# sparse = Will return sparse matrix if set True else will return an array.
+
+# fit and apply the encoder to the input values
+X_oe = encoder.fit_transform(X)
+
+# summarize the transformed data
+print(X_oe[:3, :])
