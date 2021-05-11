@@ -37,3 +37,34 @@ Xtrans = imputer.transform(X)
 
 # print total missing
 print('Missing: %d' % sum(isnan(Xtrans).flatten()))
+
+
+# Feature selection is the process of reducing the number of input 
+# variables when developing a predictive model.Recursive Feature 
+# Elimination, or RFE for short, is a popular feature selection algorithm.
+
+
+
+from sklearn.datasets import make_classification
+from sklearn.feature_selection import RFE
+from sklearn.tree import DecisionTreeClassifier
+
+# Generate a random n-class classification problem.
+X,Y = make_classification(n_samples=1000, n_features=10, n_informative=5, n_redundant=5, random_state=1)
+# n_sample = Number of samples
+# n_features = Number of features
+# n_informative = The number of informative features
+# n_redundant = The number of redundant features. These features are generated 
+# as random linear combinations of the informative features.
+
+# Define RFE
+rfe = RFE(estimator=DecisionTreeClassifier(), n_features_to_select=5)
+# estimator = A supervised learning estimator with a fit method that provides 
+# information about feature importance
+# n_features_to_select = The number of features to select
+
+# fit RFE
+rfe.fit(X, Y)
+
+for i in range(X.shape[1]):
+	print('Column: %d, Selected=%s, Rank: %d' % (i, rfe.support_[i], rfe.ranking_[i]))
