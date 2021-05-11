@@ -68,3 +68,21 @@ rfe.fit(X, Y)
 
 for i in range(X.shape[1]):
 	print('Column: %d, Selected=%s, Rank: %d' % (i, rfe.support_[i], rfe.ranking_[i]))
+
+
+
+# Normalisation = Each of the input variables in scaled to be in between 0-1
+
+from sklearn.datasets import make_classification
+from sklearn.preprocessing import MinMaxScaler
+
+X, Y = make_classification(n_samples=1000, n_features=5, n_informative=5, n_redundant=0, random_state=1)
+
+# summarize data before the transform
+print(X[:3, :])
+
+scaler = MinMaxScaler()
+X_norm = scaler.fit_transform(X)
+
+# summarize data after the transform
+print(X_norm[:3, :])
