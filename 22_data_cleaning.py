@@ -62,3 +62,11 @@ transform = VarianceThreshold()
 X_sel = transform.fit_transform(X)
 print(X_sel.shape)
 # As the threshold is 0, only column 22 is removed
+
+
+# Removal of duplicate rows
+
+from pandas import read_csv
+
+data = read_csv('iris.csv',header=0, index_col=0)
+print(data)
