@@ -68,5 +68,17 @@ print(X_sel.shape)
 
 from pandas import read_csv
 
-data = read_csv('iris.csv',header=0, index_col=0)
-print(data)
+path = 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv'
+# load the dataset
+df = read_csv(path, header=None)
+# calculate duplicates
+dups = df.duplicated()
+# report if there are any duplicates
+print(dups.any())
+# list all duplicate rows
+print(df[dups])
+
+print(df.shape)
+# delete duplicate rows
+df.drop_duplicates(inplace=True)
+print(df.shape)
