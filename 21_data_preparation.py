@@ -150,3 +150,24 @@ trans = KBinsDiscretizer(n_bins=10, encode="ordinal",strategy="uniform")
 X_discrete = trans.fit_transform(X)
 # summarize data after the transform
 print(X_discrete[:3, :])
+
+
+
+# Dimensionality reduction with PCA
+
+# The number of input variables or features for a dataset is referred to as its dimensionality.
+
+from sklearn.datasets import make_classification
+from sklearn.decomposition import PCA
+
+X, y = make_classification(n_samples=1000, n_features=10, n_informative=3, n_redundant=7, random_state=1)
+# summarize data before the transform
+print(X[:3, :])
+# define the transform
+trans = PCA(n_components=3)
+# n_components tells the number of components to keep after the tranformation
+
+# transform the data
+X_dim = trans.fit_transform(X)
+# summarize data after the transform
+print(X_dim[:3, :])
