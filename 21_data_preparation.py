@@ -126,3 +126,27 @@ X_oe = encoder.fit_transform(X)
 
 # summarize the transformed data
 print(X_oe[:3, :])
+
+
+
+# Discretization is the process through which we can transform continuous 
+# variables, models or functions into a discrete form. We do this by creating 
+# a set of contiguous intervals (or bins) that go across the range of our 
+# desired variable/model/function.
+
+from sklearn.datasets import make_classification
+from sklearn.preprocessing import KBinsDiscretizer
+
+# define dataset
+X, y = make_classification(n_samples=1000, n_features=5, n_informative=5, n_redundant=0, random_state=1)
+
+# summarize data before the transform
+print(X[:3, :])
+
+# define the transform
+trans = KBinsDiscretizer(n_bins=10, encode="ordinal",strategy="uniform")
+
+# transform the data
+X_discrete = trans.fit_transform(X)
+# summarize data after the transform
+print(X_discrete[:3, :])
