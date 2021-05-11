@@ -44,3 +44,21 @@ new = data.drop(columns_to_delete, axis=1, inplace=False)
 print(new.shape)
 
 
+# Remove columns with low variance
+
+from sklearn.feature_selection import VarianceThreshold
+
+df = read_csv("oil-spill.csv", header=None)
+# split data into inputs and outputs
+data = df.values
+X = data[:, :-1]
+y = data[:, -1]
+print(X.shape, y.shape)
+# define the transform
+transform = VarianceThreshold()
+# The default value of parameter in `VarianceThreshold` is `threshold` is 0
+
+# transform the input data
+X_sel = transform.fit_transform(X)
+print(X_sel.shape)
+# As the threshold is 0, only column 22 is removed
