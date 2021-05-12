@@ -140,3 +140,15 @@ for i,v in enumerate(importance):
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
 
+# Classification
+from xgboost import XGBClassifier
+
+model = XGBClassifier()
+model.fit(X,Y)
+
+importance = model.feature_importances_
+
+for i, v in enumerate(importance):
+    print("Feature: %0d, Score: %0.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
