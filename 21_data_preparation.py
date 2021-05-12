@@ -171,3 +171,5 @@ trans = PCA(n_components=3)
 X_dim = trans.fit_transform(X)
 # summarize data after the transform
 print(X_dim[:3, :])
+
+# LDA can also be used for dimensionality reduction.
