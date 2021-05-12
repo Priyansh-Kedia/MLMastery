@@ -78,3 +78,17 @@ for i,v in enumerate(importance):
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
 
+
+# Classification
+from sklearn.tree import DecisionTreeClassifier
+
+model = DecisionTreeClassifier()
+
+model.fit(X,Y)
+importance = model.feature_importances_
+
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
