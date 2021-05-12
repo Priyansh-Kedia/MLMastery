@@ -166,6 +166,7 @@ plt.show()
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.inspection import permutation_importance
 
+# Regression
 model = KNeighborsRegressor()
 model.fit(X_reg, Y_reg)
 
@@ -178,3 +179,18 @@ for i, v in enumerate(importance):
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
 
+
+# Classification
+from sklearn.neighbors import KNeighborsClassifier
+
+model = KNeighborsClassifier()
+model.fit(X,Y)
+
+result = permutation_importance(model,X,Y, scoring='accuracy')
+
+importance = result.importances_mean
+
+for i,v in enumerate(importance):
+    print("Feature: %0d, Scoring: %0.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
