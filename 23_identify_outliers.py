@@ -3,6 +3,7 @@
 
 from numpy.random import seed, randn
 from numpy import mean, std
+from matplotlib import pyplot as plt
 
 # seed the random number generator
 seed(1)
@@ -11,6 +12,9 @@ data = 5 * randn(10000) + 50
 
 # summarize
 print('mean=%.3f stdv=%.3f' % (mean(data), std(data)))
+
+plt.plot(data)
+plt.show()
 
 # Standard deviation method
 
@@ -24,6 +28,9 @@ print('Identified outliers: %d' % len(outliers))
 # remove outliers
 outliers_removed = [x for x in data if x >= lower and x <= upper]
 print('Non-outlier observations: %d' % len(outliers_removed))
+
+plt.plot(outliers_removed)
+plt.show()
 
 
 # Interquartile Range Method
