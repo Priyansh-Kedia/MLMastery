@@ -83,7 +83,6 @@ plt.show()
 from sklearn.tree import DecisionTreeClassifier
 
 model = DecisionTreeClassifier()
-
 model.fit(X,Y)
 importance = model.feature_importances_
 
