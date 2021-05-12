@@ -39,3 +39,40 @@ encoder = OneHotEncoder(sparse=False)
 onehot = encoder.fit_transform(data)
 print(onehot)
 
+
+# Dummy variable encoding
+# The one-hot encoding creates one binary variable for each category.
+# The problem is that this representation includes redundancy. For 
+# example, if we know that [1, 0, 0] represents “blue” and [0, 1, 0] 
+# represents “green” we don’t need another binary variable to represent 
+# “red“, instead we could use 0 values for both “blue” and “green” alone, e.g. [0, 0].
+# This is called a dummy variable encoding, and always represents C categories 
+# with C-1 binary variables.
+
+from numpy import asarray
+from sklearn.preprocessing import OneHotEncoder
+# define data
+data = asarray([['red'], ['green'], ['blue']])
+print(data)
+# define one hot encoding
+encoder = OneHotEncoder(drop='first', sparse=False)
+# transform data
+onehot = encoder.fit_transform(data)
+print(onehot)
+
+
+# Breast cancer dataset
+
+from pandas import read_csv
+# define the location of the dataset
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/breast-cancer.csv"
+# load the dataset
+dataset = read_csv(url, header=None)
+# retrieve the array of data
+data = dataset.values
+# separate into input and output columns
+X = data[:, :-1].astype(str)
+y = data[:, -1].astype(str)
+# summarize
+print('Input', X.shape)
+print('Output', y.shape)
