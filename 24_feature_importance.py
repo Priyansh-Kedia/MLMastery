@@ -23,6 +23,7 @@ X_reg, Y_reg = make_regression(n_samples=1000, n_features=10, n_informative=5, r
 # input features. This assumes that the input features had the same scale before training
 
 from sklearn.linear_model import LinearRegression
+from matplotlib import pyplot as plt
 
 model = LinearRegression()
 
@@ -32,5 +33,6 @@ importance = model.coef_
 
 for i,v in enumerate(importance):
     print('Feature: %0d, Score: %.5f' % (i,v))
-
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
 
