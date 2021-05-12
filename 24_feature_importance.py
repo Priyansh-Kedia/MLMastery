@@ -91,3 +91,19 @@ for i,v in enumerate(importance):
 # plot feature importance
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
+
+
+# Random forest feature importance
+
+# Regression
+from sklearn.ensemble import RandomForestRegressor
+
+model = RandomForestRegressor()
+model.fit(X_reg, Y_reg)
+
+importance = model.feature_importances_
+
+for i,v in enumerate(importance):
+    print("Feature: %0d, Score: %.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
