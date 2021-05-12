@@ -6,6 +6,7 @@
 # We will create test dataset with 5 important and 5 unimportant features
 # Dataset would be created both for classification as well as regression
 
+from math import perm
 from sklearn.datasets import make_classification
 
 # Create a classification dataset
@@ -152,3 +153,28 @@ for i, v in enumerate(importance):
     print("Feature: %0d, Score: %0.5f" % (i,v))
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
+
+
+
+# Permuation feature importance
+# First, a model is fit on the dataset, such as a model that does not support native feature 
+# importance scores. Then the model is used to make predictions on a dataset, although the 
+# values of a feature (column) in the dataset are scrambled. This is repeated for each feature 
+# in the dataset. Then this whole process is repeated 3, 5, 10 or more times. The result is a 
+# mean importance score for each input feature (and distribution of scores given the repeats).
+
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.inspection import permutation_importance
+
+model = KNeighborsRegressor()
+model.fit(X_reg, Y_reg)
+
+results = permutation_importance(model, X_reg, Y_reg, scoring='neg_mean_squared_error')
+
+importance = results.importances_mean
+
+for i, v in enumerate(importance):
+    print("Feature %0d, Scoring: %0.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
+
