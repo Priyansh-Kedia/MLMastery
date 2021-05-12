@@ -7,6 +7,7 @@
 # Dataset would be created both for classification as well as regression
 
 from math import perm
+from sklearn import feature_selection
 from sklearn.datasets import make_classification
 
 # Create a classification dataset
@@ -194,3 +195,40 @@ for i,v in enumerate(importance):
     print("Feature: %0d, Scoring: %0.5f" % (i,v))
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
+
+
+# Feature selection with importance
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.33, random_state=seed)
+
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train, Y_train)
+
+yhat = model.predict(X_test)
+
+accuracy = accuracy_score(Y_test, yhat)
+print('Accuracy: %.2f' % (accuracy*100))
+
+
+from sklearn.feature_selection import SelectFromModel
+
+# The first parameter is the model we wish to use
+# The second parameter is the maximum number of features to be chosen
+feature_selection = SelectFromModel(RandomForestClassifier(n_estimators=200), max_features=5)
+
+# Learn the relationship between input and output
+feature_selection.fit(X_train, Y_train)
+
+X_train_fs = feature_selection.transform(X_train)
+X_test_fs = feature_selection.transform(X_test)
+
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train_fs, Y_train)
+# evaluate the model
+yhat = model.predict(X_test_fs)
+# evaluate predictions
+accuracy = accuracy_score(Y_test, yhat)
+print('Accuracy: %.2f' % (accuracy*100))
