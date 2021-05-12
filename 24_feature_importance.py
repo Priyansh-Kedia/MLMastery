@@ -59,3 +59,22 @@ plt.show()
 # features towards 1, and negative coefficient indicates towards 0, in a problem where
 # 0 and 1 are classes
 
+
+# Decision Tree Feature Importance
+
+# CART Feature Importance
+
+# Regression
+from sklearn.tree import DecisionTreeRegressor
+
+model = DecisionTreeRegressor()
+
+model.fit(X_reg, Y_reg)
+importance = model.feature_importances_
+
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
+
