@@ -120,3 +120,23 @@ for i,v in enumerate(importance):
     print("Feature: %0d, Score: %.5f" % (i,v))
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
+
+
+# XGBoost feature importance
+# XGBoost is a library that provides an efficient and effective implementation of 
+# the stochastic gradient boosting algorithm.
+
+# Regression
+from xgboost import XGBRegressor
+
+model = XGBRegressor()
+model.fit(X_reg, Y_reg)
+
+importance = model.feature_importances_
+print(importance)
+
+for i,v in enumerate(importance):
+    print("Feature: %0d, Score: %0.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
+
