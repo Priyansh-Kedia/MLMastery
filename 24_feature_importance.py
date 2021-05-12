@@ -36,3 +36,26 @@ for i,v in enumerate(importance):
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
 
+
+# Logistic Regresion feature importance
+# The same process of retrieval of coefficients after the model is fit can be applied
+# on Logistic Regression. This also assumes that the input features had the same scale before training
+
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+
+model.fit(X, Y)
+importance = model.coef_[0]
+# In case of Logistic Regression, coef_ returns a 2D array, this can be checked by print(model.coef_)
+
+for i,v in enumerate(importance):
+	print('Feature: %0d, Score: %.5f' % (i,v))
+# plot feature importance
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
+# We will be able to see that there a negative coefficients too, which does not mean, 
+# that they are of less importance. A positive coefficient indicates the weight of the 
+# features towards 1, and negative coefficient indicates towards 0, in a problem where
+# 0 and 1 are classes
+
