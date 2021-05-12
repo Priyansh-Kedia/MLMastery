@@ -107,3 +107,16 @@ for i,v in enumerate(importance):
     print("Feature: %0d, Score: %.5f" % (i,v))
 plt.bar([x for x in range(len(importance))], importance)
 plt.show()
+
+# Classfication
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier()
+model.fit(X,Y)
+
+importance = model.feature_importances_
+
+for i,v in enumerate(importance):
+    print("Feature: %0d, Score: %.5f" % (i,v))
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
