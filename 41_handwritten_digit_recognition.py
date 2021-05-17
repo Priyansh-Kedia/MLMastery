@@ -37,3 +37,26 @@ X_test = X_test / 255
 Y_train = np_utils.to_categorical(Y_train)
 Y_test = np_utils.to_categorical(Y_test)
 num_classes = Y_test.shape[1]
+
+# define baseline model
+def baseline_model():
+    # create model
+    model = Sequential()
+    # dense layer out is calculated as follows
+    # output = activation(dot(input, kernel) + bias)
+    # kernel is a weights matrix created by the layer
+
+
+    # first param is the dimensions of the output from this layer
+    # second param is the input dimensions of this layer, which is 28*28 = 784 in this case
+    # kernel_regularizer: Regularizer function applied to the kernel weights matrix.
+    # activation: Activation function to use. If you don't specify anything, no activation 
+    # is applied (ie. "linear" activation: a(x) = x).
+    # Read about the different activations here https://keras.io/api/layers/activations/
+    model.add(Dense(num_pixels, input_dim=num_pixels, kernel_initializer="normal", activation="relu"))
+    model.add(Dense(num_classes, kernel_initializer="normal", activation="softmax"))
+
+    # compile model
+    model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+    return model
+
