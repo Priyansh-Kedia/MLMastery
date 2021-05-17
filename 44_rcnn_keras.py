@@ -19,3 +19,9 @@ dataset = pd.read_csv("international-airlines-passengers.csv", usecols=[1],engin
 
 plt.plot(dataset)
 plt.show()
+
+# The Long Short-Term Memory network, or LSTM network, is a recurrent 
+# neural network that is trained using Backpropagation Through Time and 
+# overcomes the vanishing gradient problem.
+
+
