@@ -57,6 +57,11 @@ def baseline_model():
     model.add(Dense(num_classes, kernel_initializer="normal", activation="softmax"))
 
     # compile model
+    # The loss function to be used. To optimise a solution, loss should be least
+    # Optimizers are Classes or methods used to change the attributes of your 
+    # machine/deep learning model such as weights and learning rate in order to reduce the losses.
+    # Read about different kinds of optimizers here https://keras.io/api/optimizers/
+    
     model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
     return model
 
