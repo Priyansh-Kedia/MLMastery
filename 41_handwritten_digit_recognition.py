@@ -140,8 +140,14 @@ num_classes = Y_test.shape[1]
 def baseline_model():
     # create model
     model = Sequential()
+    # first param is the dimensionality of the output space.
+    # second param is the height and width of the convolution window
     model.add(Conv2D(32, (5, 5), input_shape=(28, 28, 1), activation='relu'))
+
+    # pool_size specifies the pool window for max pool
     model.add(MaxPooling2D(pool_size=(2, 2)))
+
+    # Dropout 0.2 means 20% of neurons will be dropped
     model.add(Dropout(0.2))
     model.add(Flatten())
     model.add(Dense(128, activation='relu'))
