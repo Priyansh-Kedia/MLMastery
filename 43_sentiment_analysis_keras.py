@@ -48,6 +48,13 @@ X_test = sequence.pad_sequences(X_test, maxlen=max_words)
 
 # create the model
 model = Sequential()
+
+# Turns positive integers (indexes) into dense vectors of fixed size.
+# first param is the input dimension
+# second param is the output dimension
+# input_length: Length of input sequences, when it is constant. This 
+# argument is required if you are going to connect Flatten then Dense 
+# layers upstream (without it, the shape of the dense outputs cannot be computed).
 model.add(Embedding(top_words, 32, input_length=max_words))
 model.add(Flatten())
 model.add(Dense(250, activation='relu'))
