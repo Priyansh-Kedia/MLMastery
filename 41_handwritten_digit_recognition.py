@@ -80,3 +80,60 @@ model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_s
 # verbose: 0 or 1. Verbosity mode. 0 = silent, 1 = progress bar.
 scores = model.evaluate(X_test, Y_test, verbose=0)
 print("Baseline Error: %.2f%%" % (100-scores[1]*100))
+
+
+# Now we create a CNN to reduce the error
+from keras.datasets import mnist
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten
+from keras.layers.convolutional import Conv2D, MaxPooling2D
+from keras.utils import np_utils
+
+# In Keras, the layers used for two-dimensional convolutions expect pixel values with the 
+# dimensions [pixels][width][height][channels].
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+# reshape to be [samples][width][height][channels]
+X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32')
+X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32')
+
+# Normalizing the values
+X_train = X_train / 255
+X_test = X_test / 255
+# one hot encoding of outputs
+Y_train = np_utils.to_categorical(Y_train)
+Y_test = np_utils.to_categorical(Y_test)
+num_classes = Y_test.shape[1]
+
+# The first hidden layer is a convolutional layer called a Convolution2D. The layer has 32 
+# feature maps, which with the size of 5×5 and a rectifier activation function. This is the input 
+# layer, expecting images with the structure outline above [pixels][width][height].
+# Next we define a pooling layer that takes the max called MaxPooling2D. It is configured with a pool size of 2×2.
+# The next layer is a regularization layer using dropout called Dropout. It is configured to randomly exclude 
+# 20% of neurons in the layer in order to reduce overfitting.
+# Next is a layer that converts the 2D matrix data to a vector called Flatten. It allows the output to 
+# be processed by standard fully connected layers.
+# Next a fully connected layer with 128 neurons and rectifier activation function.
+# Finally, the output layer has 10 neurons for the 10 classes and a softmax activation function to output 
+# probability-like predictions for each class.
+
+def baseline_model():
+    # create model
+    model = Sequential()
+    model.add(Conv2D(32, (5, 5), input_shape=(28, 28, 1), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.2))
+    model.add(Flatten())
+    model.add(Dense(128, activation='relu'))
+    model.add(Dense(num_classes, activation='softmax'))
+    # Compile model
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    return model
+
+
+# build the model
+model = baseline_model()
+# Fit the model
+model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_size=200, verbose=2)
+# Final evaluation of the model
+scores = model.evaluate(X_test, Y_test, verbose=0)
+print("CNN Error: %.2f%%" % (100-scores[1]*100))
