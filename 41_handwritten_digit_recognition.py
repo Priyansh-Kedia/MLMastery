@@ -61,7 +61,22 @@ def baseline_model():
     # Optimizers are Classes or methods used to change the attributes of your 
     # machine/deep learning model such as weights and learning rate in order to reduce the losses.
     # Read about different kinds of optimizers here https://keras.io/api/optimizers/
-    
+
     model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
     return model
 
+# build the model
+model = baseline_model()
+# fit the model
+# batch_size: Integer or None. Number of samples per gradient update. If unspecified, 
+# batch_size will default to 32
+# epochs: Integer. Number of epochs to train the model. An epoch is an iteration over 
+# the entire x and y data provided.
+# verbose: 'auto', 0, 1, or 2. Verbosity mode. 0 = silent, 1 = progress bar, 2 = one 
+# line per epoch. 'auto' defaults to 1 for most cases
+model.fit(X_train, Y_train, validation_data=(X_test, Y_test), epochs=10, batch_size=200, verbose=2)
+# final evaluation of the model
+
+# verbose: 0 or 1. Verbosity mode. 0 = silent, 1 = progress bar.
+scores = model.evaluate(X_test, Y_test, verbose=0)
+print("Baseline Error: %.2f%%" % (100-scores[1]*100))
