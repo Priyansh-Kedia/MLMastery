@@ -104,6 +104,27 @@ Y_train = np_utils.to_categorical(Y_train)
 Y_test = np_utils.to_categorical(Y_test)
 num_classes = Y_test.shape[1]
 
+# There a three types of layers in Convolution, convolutional layers, 
+# pooling layers, and fully connected layers
+# convolution is a mathematical operation on two functions (f and g) that produces a third function 
+# (f*g) that expresses how the shape of one is modified by the other.
+# You can learn about how convolution works here https://www.youtube.com/watch?v=Etksi-F5ug8
+# The output is termed as the Feature map which gives us information about the image such as the 
+# corners and edges. Later, this feature map is fed to other layers to learn several other features 
+# of the input image.
+
+# Learn about pooling layer here https://www.youtube.com/watch?v=VpSLtKiPhLM
+# The primary aim of this layer is to decrease the size of the convolved feature map to 
+# reduce the computational costs.
+
+# In FC layer the input image from the previous layers are flattened and fed to the FC layer. 
+# The flattened vector then undergoes few more FC layers where the mathematical functions operations 
+# usually take place. In this stage, the classification process begins to take place.
+
+# Usually, when all the features are connected to the FC layer, it can cause overfitting in the 
+# training dataset. Overfitting occurs when a particular model works so well on the training data 
+# causing a negative impact in the model’s performance when used on a new data.
+
 # The first hidden layer is a convolutional layer called a Convolution2D. The layer has 32 
 # feature maps, which with the size of 5×5 and a rectifier activation function. This is the input 
 # layer, expecting images with the structure outline above [pixels][width][height].
