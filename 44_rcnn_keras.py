@@ -135,6 +135,22 @@ plt.show()
 # Creating RCNN using time series
 
 # LSTM for international airline passengers problem with time step regression framing
+# Some sequence problems may have a varied number of time steps per sample. For example, 
+# you may have measurements of a physical machine leading up to a point of failure or a 
+# point of surge. Each incident would be a sample the observations that lead up to the 
+# event would be the time steps, and the variables observed would be the features.
+
+# Time steps provide another way to phrase our time series problem. Like above in the 
+# window example, we can take prior time steps in our time series as inputs to predict 
+# the output at the next time step.
+
+# Instead of phrasing the past observations as separate input features, we can use them 
+# as time steps of the one input feature, which is indeed a more accurate framing of the problem.
+
+# We can do this using the same data representation as in the previous window-based example, 
+# except when we reshape the data, we set the columns to be the time steps dimension and 
+# change the features dimension back to 1. 
+
 import numpy
 import matplotlib.pyplot as plt
 from pandas import read_csv
