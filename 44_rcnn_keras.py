@@ -81,12 +81,19 @@ look_back = 1
 trainX, trainY = create_dataset(train, look_back)
 testX, testY = create_dataset(test, look_back)
 
+# The LSTM network expects the input data (X) to be provided with 
+# a specific array structure in the form of: [samples, time steps, features].
+# Currently, our data is in the form: [samples, features] and we are framing 
+# the problem as one time step for each sample.
 # reshape the data
 trainX = numpy.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
 testX = numpy.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
 # create the model
 model = Sequential()
+
+# units: Positive integer, dimensionality of the output space.
+# By default, the recurrent activation is sigmoid
 model.add(LSTM(4, input_shape=(1, look_back)))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
