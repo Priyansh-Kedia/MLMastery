@@ -126,3 +126,7 @@ plt.plot(scaler.inverse_transform(dataset))
 plt.plot(trainPredictPlot)
 plt.plot(testPredictPlot)
 plt.show()
+
+
+# Now we will create LSTM using window method
+# In this case we set the value of look_back to 3
