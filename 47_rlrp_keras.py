@@ -25,7 +25,7 @@ model.add(Dense(1, activation="sigmoid"))
 # velocity = momentum * velocity - learning_rate * g
 # w = w + velocity
 
-# What is velocity in SGD
+# What is velocity in SGD? 
 
 opt = SGD(lr=0.01,momentum=0.9)
 model.compile(loss="binary_crossentropy",optimizer=opt, metrics=['accuracy'])
