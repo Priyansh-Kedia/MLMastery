@@ -22,6 +22,11 @@ opt = SGD(lr=0.01,momentum=0.9)
 model.compile(loss="binary_crossentropy",optimizer=opt, metrics=['accuracy'])
 
 # defining the learning rate schedule
+# monitor: quantity to be monitored.
+# factor: factor by which the learning rate will be reduced. new_lr = lr * factor.
+# patience: number of epochs with no improvement after which learning rate will be reduced.
+# min_delta: threshold for measuring the new optimum, to only focus on significant changes.
+
 rlrp = ReduceLROnPlateau(monitor="val_loss", factor=0.1, patience=5, min_delta=1E-7, verbose=1)
 
 # fit the model
