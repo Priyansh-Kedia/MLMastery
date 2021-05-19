@@ -18,6 +18,15 @@ model.add(Dense(50, input_dim=2, activation="relu"))
 model.add(Dense(1, activation="sigmoid"))
 
 # compile the model
+# Stochastic Gradient descent (with momentum) optimizer.
+# When momentum is 0, (w is weight, g is gradient)
+# w = w - learning_rate * g
+# When momentum is larger than 0
+# velocity = momentum * velocity - learning_rate * g
+# w = w + velocity
+
+# What is velocity in SGD
+
 opt = SGD(lr=0.01,momentum=0.9)
 model.compile(loss="binary_crossentropy",optimizer=opt, metrics=['accuracy'])
 
