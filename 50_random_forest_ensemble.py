@@ -9,6 +9,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 X,Y = make_classification(random_state=1)
 
+# number of randomly selected features to consider at each split point 
+# via the “max_features” argument, which is set to the square root of 
+# the number of features in your dataset by default.
 model = RandomForestClassifier(n_estimators=50)
 
 cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
