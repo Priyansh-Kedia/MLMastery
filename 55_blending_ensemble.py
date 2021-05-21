@@ -99,7 +99,7 @@ def fit_ensemble(models, X_train, X_val, Y_train, Y_val):
 
         # predict_proba asks the model to predict probability
         yhat = model.predict_proba(X_val)
-        yhat = yhat.reshape(len(yhat), 1)
+
         meta_x.append(yhat)
 
     # Stack arrays in sequence horizontally (column wise).
@@ -111,9 +111,8 @@ def fit_ensemble(models, X_train, X_val, Y_train, Y_val):
 def predict_ensemble(models, blender, X_test):
     meta_X = list()
     for name, model in models:
-        yhat = model.predict(X_test)
-	    # reshape predictions into a matrix with one column
-        yhat = yhat.reshape(len(yhat), 1)
+        yhat = model.predict_proba(X_test)
+	
 	    # store prediction
         meta_X.append(yhat)
 
