@@ -21,6 +21,12 @@ model = Sequential()
 
 # units: Positive integer, dimensionality of the output space.
 # units is the first parameter of LSTM
+# When defining the input layer of your LSTM network, the network 
+# assumes you have 1 or more samples and requires that you specify 
+# the number of time steps and the number of features. You can do 
+# this by specifying a tuple to the “input_shape” argument.
+# For example, the model below defines an input layer that expects 
+# 1 or more samples, 1 time steps, and 1 features.
 model.add(LSTM(10, input_shape=(1,1)))
 model.add(Dense(1))
 
