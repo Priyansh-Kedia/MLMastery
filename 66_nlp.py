@@ -15,4 +15,10 @@ words = text.split()
 
 # convert to lowercase
 words = [word.lower() for word in words]
-print(words)
+# print(words)
+
+from nltk.tokenize import word_tokenize
+import nltk
+
+tokens = word_tokenize(text)
+print(tokens)
