@@ -5,6 +5,7 @@ from os import listdir
 from collections import Counter
 
 from keras.preprocessing.text import Tokenizer
+from numpy import array
 
 def load_doc(filename):
     file = open(filename,"r")
@@ -148,6 +149,7 @@ tokenizer.fit_on_texts(docs)
 #                   (1 + self.index_docs.get(j, 0)))
 #       x[i][j] = tf * idf
 XTrain = tokenizer.texts_to_matrix(docs, mode='freq')
+ytrain = array([0 for _ in range(900)] + [1 for _ in range(900)])
 print(XTrain.shape)
 
 # load all test reviews
@@ -157,4 +159,24 @@ docs = negative_lines + positive_lines
 
 # encode training data set
 Xtest = tokenizer.texts_to_matrix(docs, mode='freq')
+ytest = array([0 for _ in range(100)] + [1 for _ in range(100)])
 print(Xtest.shape)
+
+
+# Sentiment analysis model
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+
+n_words = Xtest.shape[1]
+# define network
+model = Sequential()
+model.add(Dense(50, input_shape=(n_words,), activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+# compile network
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# fit network
+model.fit(XTrain, ytrain, epochs=50, verbose=2)
+# evaluate
+loss, acc = model.evaluate(Xtest, ytest, verbose=0)
+print('Test Accuracy: %f' % (acc*100))
