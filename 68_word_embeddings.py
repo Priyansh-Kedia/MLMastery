@@ -19,4 +19,4 @@ print(model)
 # print(words)
 
 # access vector for one word
-print(model['sentence'])
+print(model['sentence']) 
