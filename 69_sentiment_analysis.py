@@ -4,6 +4,8 @@ import string
 from os import listdir
 from collections import Counter
 
+from keras.preprocessing.text import Tokenizer
+
 def load_doc(filename):
     file = open(filename,"r")
     text = file.read()
