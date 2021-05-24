@@ -56,3 +56,10 @@ for line in lines:
 
 vocab_size = len(mapping)
 print('Vocabulary Size: %d' % vocab_size)
+print("Sequence", sequences)
+
+# Split into input and output sequence of characters
+sequences = array(sequences)
+X, y = sequences[:,:-1], sequences[:,-1]
+
+# Ended here, due to lack of understanding, WTF!
