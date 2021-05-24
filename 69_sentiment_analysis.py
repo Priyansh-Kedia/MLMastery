@@ -46,6 +46,12 @@ def process_docs(directory, vocab):
         path = directory + "/" + filename
         add_doc_to_vocab(path, vocab)
 
+def save_list(lines, filename):
+    # convert the lines into single blob of text
+    data = '\n'.join(lines)
+    file = open(filename, 'w')
+    file.write(data)
+    file.close()
 
 # define the vocab using Counter, so that it can store the 
 # word and its corresponding frequency
@@ -60,3 +66,5 @@ print(vocab.most_common(50))
 min_occurane = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurane]
 print(len(tokens))
+
+save_list(tokens, "vocab.txt")
