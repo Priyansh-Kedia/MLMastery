@@ -135,6 +135,18 @@ docs = negative_lines + positive_lines
 tokenizer.fit_on_texts(docs)
 
 # encode the training data set
+# mode: one of "binary", "count", "tfidf", "freq".
+# if mode == 'count':
+#    x[i][j] = c
+#    elif mode == 'freq':
+#    x[i][j] = c / len(seq)
+#    elif mode == 'binary':
+#       x[i][j] = 1
+#    elif mode == 'tfidf':
+#       tf = 1 + np.log(c)
+#       idf = np.log(1 + self.document_count /
+#                   (1 + self.index_docs.get(j, 0)))
+#       x[i][j] = tf * idf
 XTrain = tokenizer.texts_to_matrix(docs, mode='freq')
 print(XTrain.shape)
 
