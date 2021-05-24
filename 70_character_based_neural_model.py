@@ -33,3 +33,26 @@ print("Sequences length ", len(sequences))
 # save sequences to file
 out_filename = 'char_sequences.txt'
 save_doc(sequences, out_filename)
+
+def load_doc(filename):
+    file = open(filename, 'r')
+    text = file.read()
+    file.close()
+    return text
+
+# load data
+filename = "char_sequences.txt"
+raw_text = load_doc(filename)
+lines = raw_text.split('\n')
+
+# We encode the sequences to integer values
+chars = sorted(list(set(raw_text)))
+mapping = dict((c, i) for i, c in enumerate(chars))
+
+sequences = list()
+for line in lines:
+    encoded_seq = [mapping[char] for char in line]
+    sequences.append(encoded_seq)
+
+vocab_size = len(mapping)
+print('Vocabulary Size: %d' % vocab_size)
