@@ -107,3 +107,42 @@ positive_lines = docs_to_lines('txt_sentoken/pos', vocab)
 negative_lines = docs_to_lines('txt_sentoken/neg', vocab)
 # summarize what we have
 print(len(positive_lines), len(negative_lines))
+
+
+# load all docs in a directory
+def process_docs(directory, vocab, is_trian):
+	lines = list()
+	# walk through all files in the folder
+	for filename in listdir(directory):
+		# skip any reviews in the test set
+		if is_trian and filename.startswith('cv9'):
+			continue
+		if not is_trian and not filename.startswith('cv9'):
+			continue
+		# create the full path of the file to open
+		path = directory + '/' + filename
+		# load and clean the doc
+		line = doc_to_line(path, vocab)
+		# add to list
+		lines.append(line)
+	return lines
+
+
+# create the tokenizer
+tokenizer = Tokenizer()
+# fit the tokenizer on the values
+docs = negative_lines + positive_lines
+tokenizer.fit_on_texts(docs)
+
+# encode the training data set
+XTrain = tokenizer.texts_to_matrix(docs, mode='freq')
+print(XTrain.shape)
+
+# load all test reviews
+positive_lines = process_docs('txt_sentoken/pos', vocab, False)
+negative_lines = process_docs('txt_sentoken/neg', vocab, False)
+docs = negative_lines + positive_lines
+
+# encode training data set
+Xtest = tokenizer.texts_to_matrix(docs, mode='freq')
+print(Xtest.shape)
