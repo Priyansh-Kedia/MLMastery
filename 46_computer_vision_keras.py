@@ -1,22 +1,20 @@
+# example of pixel normalization
 from numpy import asarray
 from PIL import Image
-from sklearn.preprocessing import StandardScaler
 
-image = Image.open("bondi_beach.jpg")
+# load image
+image = Image.open('bondi_beach.jpg')
 pixels = asarray(image)
 
+# confirm pixel range is 0-255
 print('Data Type: %s' % pixels.dtype)
 print('Min: %.3f, Max: %.3f' % (pixels.min(), pixels.max()))
 
-# Converting int to float
-pixels = pixels.astype("float32")
+# convert from integers to floats
+pixels = pixels.astype('float32')
 
-scaler = StandardScaler()
-pixels = scaler.fit_transform(pixels)
-print('Min: %.3f, Max: %.3f' % (pixels.min(), pixels.max()))
+# normalize to the range 0-1
+pixels /= 255.0
 
-
-# Normalising the values to be in range of 0 - 1
-pixels = pixels / 255.0
-
+# confirm the normalization
 print('Min: %.3f, Max: %.3f' % (pixels.min(), pixels.max()))
