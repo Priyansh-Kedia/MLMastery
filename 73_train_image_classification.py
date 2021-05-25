@@ -33,3 +33,34 @@ model.fit(trainX, trainY, epochs=10, batch_size = 32, verbose=2)
 # evaluate model
 loss, acc = model.evaluate(testX, testY, verbose=0)
 print(loss, acc)
+
+
+
+# Image Augmentation
+from numpy import expand_dims
+from keras.preprocessing.image import load_img, img_to_array, ImageDataGenerator
+from matplotlib import pyplot
+
+image = load_img("bird.jpg")
+
+data = img_to_array(image)
+
+# expand dimensions to one sample
+data = expand_dims(data, 0)
+
+datagen = ImageDataGenerator(horizontal_flip=True, vertical_flip=True, rotation_range=90)
+
+it = datagen.flow(data, batch_size=1)
+
+# generate samples and plot
+for i in range(9):
+     # define subplot
+     pyplot.subplot(330 + 1 + i)
+     # generate batch of images
+     batch = it.next()
+     # convert to unsigned integers for viewing
+     image = batch[0].astype('uint32')
+     # plot raw pixel data
+     pyplot.imshow(image)
+# show the figure
+pyplot.show()
