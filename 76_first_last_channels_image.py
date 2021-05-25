@@ -26,3 +26,26 @@ print(data_first.shape)
 # add channels last
 data_last = expand_dims(data, axis=2)
 print(data_last.shape)
+
+
+# change channels in image
+
+from numpy import moveaxis
+from numpy import asarray
+from PIL import Image
+
+# load the color image
+img = Image.open('penguin_arade.jpg')
+
+# convert to numpy array
+data = asarray(img)
+print(data.shape)
+
+# change channels last to channels first format
+# moveaxis: Moves the axis from source to destination
+data = moveaxis(data, 2, 0)
+print(data.shape)
+
+# change channels first to channels last format
+data = moveaxis(data, 0, 2)
+print(data.shape)
