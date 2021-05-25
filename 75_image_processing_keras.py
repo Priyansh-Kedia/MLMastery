@@ -1,7 +1,7 @@
 # load image with keras
 from keras.preprocessing.image import load_img
 
-image = load_img("bondi_beach.jpg")
+img = load_img("bondi_beach.jpg")
 
 # report details about the image
 print(type(img))
