@@ -1,5 +1,6 @@
+cnn_dataset.pkl
 env
 **.pickle
-
+cnn_stories/
 Flickr8k_Dataset
 dogs-vs-cats
